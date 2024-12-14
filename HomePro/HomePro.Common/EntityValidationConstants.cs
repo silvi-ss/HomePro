@@ -54,5 +54,14 @@
             public const int PostalCodeMaxLength = 10;
 
         }
+
+        public static class ApplicationUser
+        {
+            public const int FirstNameMinLength = 2;
+            public const int FirstNameMaxLength = 50;
+
+            public const int LastNameMinLength = 2;
+            public const int LastNameMaxLength = 50;
+        }
     }
 }

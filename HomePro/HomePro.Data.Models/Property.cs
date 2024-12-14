@@ -15,8 +15,8 @@
         public string Description { get; set; } = null!;
         public DateTime CreatedOn { get; set; }
         public PropertyType Type { get; set; }
-        public string OwnerId { get; set; } = null!;
-        public ApplicationUser Owner { get; set; } = null!;
+        public string ClientId { get; set; } = null!;
+        public ApplicationUser Client { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public string? Image { get; set; }
         public virtual ICollection<PropertyContract> PropertyContracts { get; set; }

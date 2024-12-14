@@ -63,9 +63,9 @@
 
             // Relationships
             builder
-                .HasOne(p => p.Owner)
+                .HasOne(p => p.Client)
                 .WithMany()
-                .HasForeignKey(p => p.OwnerId)
+                .HasForeignKey(p => p.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
@@ -90,7 +90,7 @@
                 .HasIndex(p => p.IsDeleted);
 
             builder
-                .HasIndex(p => p.OwnerId);
+                .HasIndex(p => p.ClientId);
 
         }
     }
