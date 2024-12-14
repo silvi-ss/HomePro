@@ -19,9 +19,9 @@
         public ApplicationUser Owner { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public string? Image { get; set; }
-        public ICollection<PropertyContract> PropertyContracts { get; set; }
+        public virtual ICollection<PropertyContract> PropertyContracts { get; set; }
             = new HashSet<PropertyContract>();
-        public ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
             = new HashSet<ServiceRequest>();
     }
 }

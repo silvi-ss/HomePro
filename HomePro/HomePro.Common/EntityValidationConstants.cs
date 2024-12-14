@@ -23,5 +23,36 @@
             public const string DefaultImageName = "default.jpg";
 
         }
+
+        public static class Address 
+        {
+            public const int CountryMinLength = 5;
+            public const int CountryMaxLength = 60;
+
+            public const int CityMinLength = 2;
+            public const int CityMaxLength = 170;
+
+            public const int DistrictMinLength = 5;
+            public const int DistrictMaxLength = 50;
+
+            public const int StreetNameMinLength = 1;
+            public const int StreetNameMaxLength = 50;
+
+            public const int StreetNumberMinLength = 1;
+            public const int StreetNumberMaxLength = 50;
+
+            public const int BuildingNumberMinLength = 1;
+            public const int BuildingNumberMaxLength = 10;
+
+            public const int FloorMinLength = 1;
+            public const int FloorMaxLength = 10;
+
+            public const int EntryMinLength = 1;
+            public const int EntryMaxLength = 10;
+
+            public const int PostalCodeMinLength = 4;
+            public const int PostalCodeMaxLength = 10;
+
+        }
     }
 }

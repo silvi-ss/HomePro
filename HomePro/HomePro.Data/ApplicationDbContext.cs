@@ -6,6 +6,7 @@ namespace HomePro.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        // TODO: Generate migrations after all entities are finalized!!!!!!!!!!!!
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -16,6 +17,8 @@ namespace HomePro.Data
 
         }
         public virtual DbSet<Property> Properties { get; set; }
+
+        public virtual DbSet<Address> Addresses { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
