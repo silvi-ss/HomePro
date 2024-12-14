@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePro.Web", "HomePro.Web\HomePro.Web.csproj", "{58E36403-FA22-4A27-BA34-ADD49254ACCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePro.Web", "HomePro.Web\HomePro.Web.csproj", "{58E36403-FA22-4A27-BA34-ADD49254ACCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5A74E92F-C553-49A2-ABEC-F60FD387C66A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePro.Data", "HomePro.Data\HomePro.Data.csproj", "{EF9697C8-92B3-4E1B-B049-7AEC7DED80CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{58E36403-FA22-4A27-BA34-ADD49254ACCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E36403-FA22-4A27-BA34-ADD49254ACCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58E36403-FA22-4A27-BA34-ADD49254ACCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9697C8-92B3-4E1B-B049-7AEC7DED80CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9697C8-92B3-4E1B-B049-7AEC7DED80CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9697C8-92B3-4E1B-B049-7AEC7DED80CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9697C8-92B3-4E1B-B049-7AEC7DED80CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF9697C8-92B3-4E1B-B049-7AEC7DED80CC} = {5A74E92F-C553-49A2-ABEC-F60FD387C66A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64F1479A-FE0F-4069-A14F-7DA182EB2887}

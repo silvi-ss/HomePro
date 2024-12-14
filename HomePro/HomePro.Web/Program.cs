@@ -1,4 +1,4 @@
-using HomePro.Web.Data;
+using HomePro.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

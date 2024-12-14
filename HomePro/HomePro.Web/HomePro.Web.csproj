@@ -25,6 +25,10 @@
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\HomePro.Data\HomePro.Data.csproj" />
+	</ItemGroup>
+
   <ItemGroup>
     <ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS">
       <Value>8081</Value>
