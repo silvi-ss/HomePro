@@ -23,6 +23,8 @@ namespace HomePro.Data
 
         public virtual DbSet<ServiceCatalog> ServiceCatalogs { get; set; }
 
+        public virtual DbSet<PropertyContract> PropertyContracts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

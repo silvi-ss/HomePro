@@ -76,5 +76,11 @@
             public const int ImageMaxLength = 256;
             public const string DefaultImageName = "default.jpg";
         }
+
+        public static class PropertyContract
+        {
+            public const int ContractNumberMaxLength = 50;
+            public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
+        }
     }
 }
