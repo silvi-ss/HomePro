@@ -88,5 +88,14 @@
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 500;
         }
+
+        public static class Notification
+        {
+            public const int TitleMinLength = 10;
+            public const int TitleMaxLength = 80;
+
+            public const int MessageMinLength = 20;
+            public const int MessageMaxLength = 500;
+        }
     }
 }

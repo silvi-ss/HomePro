@@ -17,15 +17,17 @@ namespace HomePro.Data
         {
 
         }
-        public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<Property> Properties { get; set; } = null!;
 
-        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; } = null!;
 
-        public virtual DbSet<ServiceCatalog> ServiceCatalogs { get; set; }
+        public virtual DbSet<ServiceCatalog> ServiceCatalogs { get; set; } = null!;
 
-        public virtual DbSet<PropertyContract> PropertyContracts { get; set; }
+        public virtual DbSet<PropertyContract> PropertyContracts { get; set; } = null!;
 
-        public DbSet<ServiceRequest> ServiceRequests { get; set; } 
+        public virtual DbSet<ServiceRequest> ServiceRequests { get; set; } = null!; 
+
+        public virtual DbSet<Notification> Notifications { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
