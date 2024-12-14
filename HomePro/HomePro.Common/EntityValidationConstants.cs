@@ -82,5 +82,11 @@
             public const int ContractNumberMaxLength = 50;
             public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
         }
+
+        public static class ServiceRequest
+        {
+            public const int DescriptionMinLength = 10;
+            public const int DescriptionMaxLength = 500;
+        }
     }
 }
