@@ -26,6 +26,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\HomePro.Common\HomePro.Common.csproj" />
 		<ProjectReference Include="..\HomePro.Data\HomePro.Data.csproj" />
 	</ItemGroup>
 

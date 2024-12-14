@@ -13,4 +13,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+
+	<ItemGroup>	
+		<ProjectReference Include="..\HomePro.Common\HomePro.Common.csproj" />	
+		<ProjectReference Include="..\HomePro.Data.Models\HomePro.Data.Models.csproj" />
+	</ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using HomePro.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomePro.Data
@@ -10,9 +11,18 @@ namespace HomePro.Data
         {
         }
 
+        public ApplicationDbContext()
+        {
+
+        }
+        public virtual DbSet<Property> Properties { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
         }
+
+
     }
 }
