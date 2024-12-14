@@ -28,8 +28,7 @@ namespace HomePro.Data.Configuration
                 .IsRequired()
                 .HasDefaultValue(false)
                 .HasComment("Soft delete flag");
-
-            // Индекси
+            
             builder
                 .HasIndex(u => u.IsDeleted);
         }

@@ -63,5 +63,18 @@
             public const int LastNameMinLength = 2;
             public const int LastNameMaxLength = 50;
         }
+
+        public static class ServiceCatalog
+        {
+            public const int NameMinLength = 5;
+            public const int NameMaxLength = 50;
+
+            public const int DescriptionMinLength = 20;
+            public const int DescriptionMaxLength = 500;
+
+            public const int ImageMinLength = 3;
+            public const int ImageMaxLength = 256;
+            public const string DefaultImageName = "default.jpg";
+        }
     }
 }

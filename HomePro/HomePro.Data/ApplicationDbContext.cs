@@ -21,6 +21,8 @@ namespace HomePro.Data
 
         public virtual DbSet<Address> Addresses { get; set; }
 
+        public virtual DbSet<ServiceCatalog> ServiceCatalogs { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
