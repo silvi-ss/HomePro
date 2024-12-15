@@ -1,6 +1,13 @@
 using HomePro.Data;
+using HomePro.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using HomePro.Web.Infrastructure;
+using HomePro.Services.Data;
+using HomePro.Data.Repository.Interfaces;
+
+using HomePro.Web.Infrastructure.Extensions;
+using HomePro.Services.Data.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +31,11 @@ builder.Services
         options.Password.RequiredUniqueChars = 2;    
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+
+builder.Services.RegisterServices(typeof(IBaseService).Assembly);
 
 builder.Services.AddControllersWithViews();
 

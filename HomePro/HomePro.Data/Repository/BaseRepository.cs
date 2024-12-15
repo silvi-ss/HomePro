@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace HomePro.Data.Repository
 {
     public class BaseRepository<TType, TId> : IRepository<TType, TId>

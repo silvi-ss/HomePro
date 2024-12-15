@@ -27,7 +27,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HomePro.Common\HomePro.Common.csproj" />
-		<ProjectReference Include="..\HomePro.Data\HomePro.Data.csproj" />
+		<ProjectReference Include="..\HomePro.Web.Infrastructure\HomePro.Web.Infrastructure.csproj" />
+		<ProjectReference Include="..\HomePro.Services.Data\HomePro.Services.Data.csproj" />
 	</ItemGroup>
 
   <ItemGroup>
