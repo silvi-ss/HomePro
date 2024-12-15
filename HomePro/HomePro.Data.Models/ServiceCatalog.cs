@@ -13,6 +13,5 @@ namespace HomePro.Data.Models
 
         public ICollection<ServiceRequest> ServiceRequests { get; set; }
             = new HashSet<ServiceRequest>();
-
     }
 }

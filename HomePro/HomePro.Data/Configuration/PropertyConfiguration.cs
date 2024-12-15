@@ -60,31 +60,24 @@
                 .IsRequired()
                 .HasDefaultValue(false)
                 .HasComment("Soft delete flag");
-
-            // Relationships
+            
             builder
                 .HasOne(p => p.Client)
                 .WithMany()
                 .HasForeignKey(p => p.ClientId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasOne(p => p.Address)
                 .WithOne(a => a.Property)
                 .HasForeignKey<Property>(p => p.AddressId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasMany(p => p.PropertyContracts)
-                .WithOne(pc => pc.Property)
-                .HasForeignKey(pc => pc.PropertyId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+                .OnDelete(DeleteBehavior.NoAction);
+                        
             builder
                 .HasMany(p => p.ServiceRequests)
                 .WithOne(sr => sr.Property)
                 .HasForeignKey(sr => sr.PropertyId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasIndex(p => p.IsDeleted);

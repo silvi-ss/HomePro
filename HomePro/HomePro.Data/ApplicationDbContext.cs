@@ -23,12 +23,11 @@ namespace HomePro.Data
 
         public virtual DbSet<ServiceCatalog> ServiceCatalogs { get; set; } = null!;
 
-        public virtual DbSet<PropertyContract> PropertyContracts { get; set; } = null!;
-
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; } = null!; 
 
         public virtual DbSet<Notification> Notifications { get; set; } = null!;
 
+        public virtual DbSet<ServiceReview> ServiceReviews { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,10 +1,4 @@
 ﻿using HomePro.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomePro.Data.Models
 {
@@ -22,7 +16,9 @@ namespace HomePro.Data.Models
         public bool IsCompleted { get; set; } = false;
         public string? Description { get; set; }
         public DateTime PreferredDate { get; set; }
-        public ServiceRequestStatus Status { get; set; } = ServiceRequestStatus.Pending;
-
+        public ServiceRequestStatus Status { get; set; } 
+            = ServiceRequestStatus.Pending;
+        public ICollection<ServiceReview> Reviews { get; set; }
+            = new HashSet<ServiceReview>();
     }
 }

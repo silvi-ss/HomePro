@@ -97,5 +97,14 @@
             public const int MessageMinLength = 20;
             public const int MessageMaxLength = 500;
         }
+
+        public static class ServiceReview
+        {
+            public const int CommentMinLength = 10;
+            public const int CommentMaxLength = 500;
+
+            public const int RatingMinValue = 1;
+            public const int RatingMaxValue = 5; // with stars
+        }
     }
 }

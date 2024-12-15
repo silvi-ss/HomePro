@@ -3,8 +3,8 @@ namespace HomePro.Data.Models.Enums
 {
     public enum NotificationType
     {
-        NewRequest,
-        StatusChanged,
-        AppointmentConfirmed
+        NewRequest = 10,
+        StatusChanged = 20,
+        AppointmentConfirmed = 30
     }
 }
