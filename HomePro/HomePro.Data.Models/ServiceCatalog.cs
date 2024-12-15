@@ -13,5 +13,7 @@ namespace HomePro.Data.Models
 
         public ICollection<ServiceRequest> ServiceRequests { get; set; }
             = new HashSet<ServiceRequest>();
+        public ICollection<UserFavoriteService> UserFavorites { get; set; }
+            = new HashSet<UserFavoriteService>();
     }
 }

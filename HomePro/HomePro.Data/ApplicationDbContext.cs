@@ -29,6 +29,8 @@ namespace HomePro.Data
 
         public virtual DbSet<ServiceReview> ServiceReviews { get; set; } = null!;
 
+        public virtual DbSet<UserFavoriteService> UserFavoriteServices { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
