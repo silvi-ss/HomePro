@@ -63,6 +63,18 @@ namespace HomePro.Data.Configuration
                 .HasMaxLength(EntityValidationConstants.ServiceRequest.DescriptionMaxLength)
                 .IsRequired(false)
                 .HasComment("Additional description for the service request");
+
+            builder
+                .Property(sr => sr.FinalPrice)
+                .HasPrecision(18, 2)
+                .IsRequired()
+                .HasComment("Final price of the service request");
+
+            builder
+                 .ToTable(t => t.HasCheckConstraint(
+                     "CK_ServiceRequest_FinalPrice",
+                     $"FinalPrice >= {EntityValidationConstants.ServiceRequest.MinPrice} " +
+                     $"AND FinalPrice <= {EntityValidationConstants.ServiceRequest.MaxPrice}"));
         }
     }
 }

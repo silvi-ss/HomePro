@@ -16,6 +16,7 @@ namespace HomePro.Data.Models
         public bool IsCompleted { get; set; } = false;
         public string? Description { get; set; }
         public DateTime PreferredDate { get; set; }
+        public decimal FinalPrice { get; set; }
         public ServiceRequestStatus Status { get; set; } 
             = ServiceRequestStatus.Pending;
         public ICollection<ServiceReview> Reviews { get; set; }

@@ -85,6 +85,9 @@
 
         public static class ServiceRequest
         {
+            public const decimal MinPrice = 0.0M;
+            public const decimal MaxPrice = 10000.0M;
+
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 500;
         }
