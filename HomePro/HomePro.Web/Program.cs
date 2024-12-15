@@ -8,6 +8,7 @@ using HomePro.Data.Repository.Interfaces;
 
 using HomePro.Web.Infrastructure.Extensions;
 using HomePro.Services.Data.Interfaces;
+using HomePro.Data.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,10 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+//builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
+builder.Services.AddScoped<
+    IRepository<ServiceCatalog, Guid>,
+    BaseRepository<ServiceCatalog, Guid>>();
 
 builder.Services.RegisterServices(typeof(IBaseService).Assembly);
 
