@@ -74,7 +74,6 @@ namespace HomePro.Data.Configuration
                 .HasDefaultValue(false)
                 .HasComment("Soft delete flag");
 
-            // Relationship with Property (1:1)
             builder
                 .HasOne(a => a.Property)
                 .WithOne(p => p.Address)

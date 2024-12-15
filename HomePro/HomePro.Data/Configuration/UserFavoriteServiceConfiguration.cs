@@ -27,13 +27,13 @@ namespace HomePro.Data.Configuration
                 .HasOne(fs => fs.User)
                 .WithMany(u => u.FavoriteServices)
                 .HasForeignKey(fs => fs.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasOne(fs => fs.Service)
                 .WithMany(s => s.UserFavorites)
                 .HasForeignKey(fs => fs.ServiceCatalogId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasIndex(fs => fs.IsDeleted);

@@ -13,7 +13,7 @@
         public string Description { get; set; } = null!;
         public DateTime CreatedOn { get; set; }
         public PropertyType Type { get; set; }
-        public string ClientId { get; set; } = null!;
+        public Guid ClientId { get; set; }
         public ApplicationUser Client { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public string? Image { get; set; }

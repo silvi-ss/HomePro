@@ -6,8 +6,7 @@ using System.Reflection;
 namespace HomePro.Data
 {
     public class ApplicationDbContext : IdentityDbContext
-    {
-        // TODO: Generate migrations after all entities are finalized!!!!!!!!!!!!
+    {       
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
