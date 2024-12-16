@@ -10,7 +10,7 @@ namespace HomePro.Data.Models
     public class ServiceReview
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Comment { get; set; } = null!;
+        public string Comment { get; set; } = string.Empty;
         public Rating Rating { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool IsDeleted { get; set; }

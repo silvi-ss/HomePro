@@ -5,12 +5,12 @@
     public class Property
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string DisplayName { get; set; } = null!;
+        public string DisplayName { get; set; } = string.Empty;
         public Guid AddressId { get; set; }
         public Address Address { get; set; } = null!;
         public double SquareMeters { get; set; }
         public int Rooms { get; set; }
-        public string Description { get; set; } = null!;
+        public string Description { get; set; } = string.Empty;
         public DateTime CreatedOn { get; set; }
         public PropertyType Type { get; set; }
         public Guid ClientId { get; set; }

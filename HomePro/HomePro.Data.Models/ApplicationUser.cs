@@ -4,8 +4,8 @@ namespace HomePro.Data.Models
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
-        public string FirstName { get; set; } = null!;
-        public string LastName { get; set; } = null!;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
         public ICollection<Property> Properties { get; set; }
             = new HashSet<Property>();

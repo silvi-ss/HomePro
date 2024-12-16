@@ -10,6 +10,8 @@ using HomePro.Services.Data.Interfaces;
 using HomePro.Data.Repository;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using HomePro.Web.EmailServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +52,7 @@ builder.Services.RegisterServices(typeof(IBaseService).Assembly);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
 
 var app = builder.Build();
 
