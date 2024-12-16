@@ -35,7 +35,10 @@ builder.Services
         options.Password.RequireUppercase = true;
         options.Password.RequiredUniqueChars = 2;    
     })
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+    //.AddDefaultTokenProviders();
+
 
 
 //builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
