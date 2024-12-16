@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomePro.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241216125725_InitialCreate")]
+    [Migration("20241216154354_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -250,7 +250,7 @@ namespace HomePro.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 16, 12, 57, 24, 795, DateTimeKind.Utc).AddTicks(595))
+                        .HasDefaultValue(new DateTime(2024, 12, 16, 15, 43, 53, 158, DateTimeKind.Utc).AddTicks(7991))
                         .HasComment("Date and time of property creation");
 
                     b.Property<string>("Description")

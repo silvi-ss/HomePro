@@ -247,7 +247,7 @@ namespace HomePro.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 16, 12, 57, 24, 795, DateTimeKind.Utc).AddTicks(595))
+                        .HasDefaultValue(new DateTime(2024, 12, 16, 15, 43, 53, 158, DateTimeKind.Utc).AddTicks(7991))
                         .HasComment("Date and time of property creation");
 
                     b.Property<string>("Description")

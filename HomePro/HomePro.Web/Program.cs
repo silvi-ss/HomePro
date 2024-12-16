@@ -1,6 +1,7 @@
 using HomePro.Data;
 using HomePro.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HomePro.Data.Repository.Interfaces;
 
@@ -23,8 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services
-    .AddIdentity< ApplicationUser, IdentityRole <Guid>>
+builder.Services.AddIdentity< ApplicationUser, IdentityRole <Guid>>
     (options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -33,12 +33,12 @@ builder.Services
         options.Password.RequireDigit = true;
         options.Password.RequireLowercase = true;
         options.Password.RequireUppercase = true;
-        options.Password.RequiredUniqueChars = 2;    
+        options.Password.RequiredUniqueChars = 2;
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     })
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-    //.AddDefaultTokenProviders();
-
 
 
 //builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);

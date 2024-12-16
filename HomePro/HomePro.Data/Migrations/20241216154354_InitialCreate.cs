@@ -226,7 +226,7 @@ namespace HomePro.Data.Migrations
                     SquareMeters = table.Column<double>(type: "float(18)", precision: 18, scale: 2, nullable: false, comment: "Property area in square meters"),
                     Rooms = table.Column<int>(type: "int", nullable: false, comment: "Number of rooms in the property"),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true, comment: "Additional description for the property"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 16, 12, 57, 24, 795, DateTimeKind.Utc).AddTicks(595), comment: "Date and time of property creation"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 16, 15, 43, 53, 158, DateTimeKind.Utc).AddTicks(7991), comment: "Date and time of property creation"),
                     Type = table.Column<int>(type: "int", nullable: false, comment: "Type of property (Apartment, House, etc.)"),
                     ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false, comment: "Soft delete flag"),
