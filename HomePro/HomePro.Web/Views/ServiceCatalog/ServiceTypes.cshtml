@@ -1,0 +1,16 @@
+﻿@model IEnumerable<HomePro.Web.ViewModels.ServiceCatalog.ServiceTypeViewModel>
+
+@{
+    ViewData["Title"] = "Service Types";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="list-group">
+    @foreach (var type in Model)
+    {
+        <a href="#" class="list-group-item list-group-item-action">
+            @type.Name
+        </a>
+    }
+</div>

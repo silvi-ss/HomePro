@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using HomePro.Data.Models;
 using HomePro.Common;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HomePro.Web.ViewModels.ServiceCatalog
 {
@@ -25,24 +23,15 @@ namespace HomePro.Web.ViewModels.ServiceCatalog
         [Required(ErrorMessage = "Service type is required")]
         public int ServiceTypeId { get; set; }
 
-        public ICollection<ServiceTypeViewModel> ServiceTypes { get; set; }
+        public IEnumerable<ServiceTypeViewModel> ServiceTypes { get; set; }
         = new List<ServiceTypeViewModel>();
 
         [Display(Name = "Image")]
         [StringLength(
             EntityValidationConstants.ServiceCatalog.ImageMaxLength,
             ErrorMessage = "Image URL cannot be longer than {1} characters")]
-        public string? Image { get; set; }
+        public string? ImageName { get; set; }
 
-        /*private async Task<ICollection<ServiceTypeViewModel>> GetServiceTypes()
-       => await .Categories
-               .AsNoTracking()
-                  .Select(c => new ServiceTypeViewModel
-                  {
-                      Id = c.Id,
-                      Name = c.Name,
-                  })
-                  .ToListAsync();*/
-
+        public byte[]? ImageData { get; set; }
     }
 }

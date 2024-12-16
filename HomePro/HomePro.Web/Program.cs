@@ -41,6 +41,7 @@ builder.Services.AddIdentity< ApplicationUser, IdentityRole <Guid>>
     })
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+    
 
 
 //builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);

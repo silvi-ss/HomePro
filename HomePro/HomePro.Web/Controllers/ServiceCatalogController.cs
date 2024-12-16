@@ -19,7 +19,17 @@ namespace HomePro.Web.Controllers
             this.serviceCatalogService = serviceCatalogService;
         }
 
-		[AllowAnonymous]
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult ServiceTypes()
+        {
+            var serviceTypes = serviceCatalogService.GetServiceTypes();
+
+            return View(serviceTypes);
+        }
+
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -33,30 +43,48 @@ namespace HomePro.Web.Controllers
 		[HttpGet]
 		public IActionResult Add()
 		{
-			return View();
-		}
+            var model = new ServiceCatalogFormModel
+            {
+                ServiceTypes = serviceCatalogService.GetServiceTypes()
+            };
+
+            return View(model);
+        }
 
 		[Authorize]
 		[HttpPost]
-		public async Task<IActionResult> Add(ServiceCatalogFormModel model)
-		{
-			if (!ModelState.IsValid)
-			{
-				return View(model);
-			}
+        public async Task<IActionResult> Add(ServiceCatalogFormModel model, IFormFile imageFile)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.ServiceTypes = serviceCatalogService.GetServiceTypes();
+                return View(model);
+            }
 
-			try
-			{
-				await serviceCatalogService.AddServiceAsync(model);
+            try
+            {
+                if (imageFile != null)
+                {
+                    // read the file and convert it in byte[]
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await imageFile.CopyToAsync(memoryStream);
+                        model.ImageData = memoryStream.ToArray(); // file content
+                        model.ImageName = Path.GetFileName(imageFile.FileName); // file name
+                    }
+                }
+                               
+                await serviceCatalogService.AddServiceAsync(model);
 
-				TempData["SuccessMessage"] = "Service added successfully!";
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				ModelState.AddModelError("", "An error occurred while adding the service.");
-				return View(model);
-			}
-		}
+                TempData["SuccessMessage"] = "Service added successfully!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                ModelState.AddModelError("", "An error occurred while adding the service.");
+                model.ServiceTypes = serviceCatalogService.GetServiceTypes();
+                return View(model);
+            }
+        }
 	}
 }

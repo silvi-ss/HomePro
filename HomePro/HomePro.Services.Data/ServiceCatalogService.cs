@@ -40,12 +40,22 @@ namespace HomePro.Services.Data
             {
                 Name = model.Name,
                 Description = model.Description,
-                Type = (ServiceType)model.ServiceTypeId,
-                Image = model.Image
+                Type = (ServiceType)model.ServiceTypeId
             };
 
-            await serviceCatalogRepository.AddAsync(service);
+            if (model.ImageData != null && !string.IsNullOrEmpty(model.ImageName))
+            {
+                var fileName = $"{Guid.NewGuid()}_{model.ImageName}";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
 
+                // save file in folder
+                await File.WriteAllBytesAsync(filePath, model.ImageData);
+
+                // save path
+                service.Image = $"/images/{fileName}";
+            }
+
+            await serviceCatalogRepository.AddAsync(service);
             return true;
         }
 
