@@ -19,6 +19,7 @@ namespace HomePro.Web.Controllers
             this.serviceCatalogService = serviceCatalogService;
         }
 
+		[AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -27,5 +28,35 @@ namespace HomePro.Web.Controllers
             return View(services);
         }
 
-    }
+
+		[Authorize]
+		[HttpGet]
+		public IActionResult Add()
+		{
+			return View();
+		}
+
+		[Authorize]
+		[HttpPost]
+		public async Task<IActionResult> Add(ServiceCatalogFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			try
+			{
+				await serviceCatalogService.AddServiceAsync(model);
+
+				TempData["SuccessMessage"] = "Service added successfully!";
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				ModelState.AddModelError("", "An error occurred while adding the service.");
+				return View(model);
+			}
+		}
+	}
 }

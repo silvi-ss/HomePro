@@ -33,5 +33,7 @@ namespace HomePro.Data.Repository.Interfaces
         bool Update(TType item);
 
         Task<bool> UpdateAsync(TType item);
-    }
+
+		Task<int> SaveChangesAsync();
+	}
 }

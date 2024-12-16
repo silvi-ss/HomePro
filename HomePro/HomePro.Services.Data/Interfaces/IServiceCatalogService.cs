@@ -6,5 +6,8 @@
     public interface IServiceCatalogService
     {
         Task<IEnumerable<ServiceCatalogIndexViewModel>> GetAllServicesAsync();
-    }
+
+		Task<bool> AddServiceAsync(ServiceCatalogFormModel model);
+
+	}
 }

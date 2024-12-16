@@ -2,25 +2,29 @@ using HomePro.Data;
 using HomePro.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using HomePro.Web.Infrastructure;
-using HomePro.Services.Data;
 using HomePro.Data.Repository.Interfaces;
 
 using HomePro.Web.Infrastructure.Extensions;
 using HomePro.Services.Data.Interfaces;
 using HomePro.Data.Repository;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services
-    .AddDefaultIdentity<IdentityUser>
+    .AddIdentity< ApplicationUser, IdentityRole <Guid>>
     (options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -35,13 +39,14 @@ builder.Services
 
 
 //builder.Services.RegisterRepositories(typeof(ApplicationUser).Assembly);
-builder.Services.AddScoped<
-    IRepository<ServiceCatalog, Guid>,
+builder.Services.AddScoped<IRepository<ServiceCatalog, Guid>,
     BaseRepository<ServiceCatalog, Guid>>();
 
 builder.Services.RegisterServices(typeof(IBaseService).Assembly);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 

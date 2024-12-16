@@ -136,5 +136,10 @@ namespace HomePro.Data.Repository
                 return false;
             }
         }
-    }
+
+		public async Task<int> SaveChangesAsync()
+		{
+			return await dbContext.SaveChangesAsync();
+		}
+	}
  }

@@ -1,4 +1,5 @@
 ﻿using HomePro.Data.Models;
+using HomePro.Data.Models.Enums;
 using HomePro.Data.Repository.Interfaces;
 using HomePro.Services.Data.Interfaces;
 using HomePro.Web.ViewModels.ServiceCatalog;
@@ -33,5 +34,31 @@ namespace HomePro.Services.Data
             return allServices;
         }
 
+        public async Task<bool> AddServiceAsync(ServiceCatalogFormModel model)
+        {
+            var service = new ServiceCatalog
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Type = (ServiceType)model.ServiceTypeId,
+                Image = model.Image
+            };
+
+            await serviceCatalogRepository.AddAsync(service);
+
+            return true;
+        }
+
+
+        public IEnumerable<ServiceTypeViewModel> GetServiceTypes()
+        {
+            return Enum.GetValues<ServiceType>()
+                .Select(t => new ServiceTypeViewModel
+                {
+                    Id = (int)t,
+                    Name = t.ToString()
+                });
+        }
     }
 }
+	
