@@ -18,20 +18,21 @@ namespace HomePro.Services.Data
 
         public async Task<IEnumerable<ServiceCatalogIndexViewModel>> GetAllServicesAsync()
         {
-            var allServices = await this.serviceCatalogRepository
-                .GetAllAttached()
-                .Where(s => !s.IsDeleted)
-                .Select(s => new ServiceCatalogIndexViewModel
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Description = s.Description,
-                    Image = s.Image ?? "default.png",
-                    Type = s.Type.ToString()
-                })
-                .ToListAsync();
+            var services = await serviceCatalogRepository
+               .GetAllAttached()
+               .Where(s => !s.IsDeleted) 
+               .Distinct()  
+               .Select(s => new ServiceCatalogIndexViewModel
+               {
+                   Id = s.Id,
+                   Name = s.Name,
+                   Description = s.Description,
+                   Image = s.Image ?? "/images/default-service.jpg",
+                   Type = s.Type.ToString()
+               })
+               .ToListAsync();
 
-            return allServices;
+            return services;
         }
 
         public async Task<bool> AddServiceAsync(ServiceCatalogFormModel model)
@@ -71,4 +72,3 @@ namespace HomePro.Services.Data
         }
     }
 }
-	

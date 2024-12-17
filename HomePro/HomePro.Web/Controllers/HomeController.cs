@@ -1,3 +1,5 @@
+using HomePro.Services.Data;
+using HomePro.Services.Data.Interfaces;
 using HomePro.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,15 +9,25 @@ namespace HomePro.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IServiceCatalogService _serviceCatalogService;
 
-        public HomeController(ILogger<HomeController> logger)
+       
+        public HomeController(ILogger<HomeController> logger, IServiceCatalogService serviceCatalogService)
         {
             _logger = logger;
+            _serviceCatalogService = serviceCatalogService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var services = await _serviceCatalogService.GetAllServicesAsync();
+
+            if (!services.Any())
+            {
+                Console.WriteLine("No services found."); 
+            }
+
+            return View(services);
         }
 
         public IActionResult Privacy()

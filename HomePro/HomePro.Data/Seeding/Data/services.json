@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Id": "d1b5f3a0-2c34-4a9f-9f4f-85ea4bbdc88a",
+    "Name": "Electrical Services",
+    "Description": "Expert electrical services, including wiring and installations.",
+    "Image": "/images/electrical-service.jpg"
+  },
+  {
+    "Id": "f3a8f3d9-1a4c-4b2b-a8d3-4f2b8dbfb28c",
+    "Name": "Cleaning Services",
+    "Description": "Professional cleaning services for residential and commercial properties.",
+    "Image": "/images/cleaning-service.jpg"
+  }
+]

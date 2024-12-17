@@ -8,19 +8,21 @@
 <div class="container mt-4">
     <h2 class="text-center">@ViewData["Title"]</h2>
 
+   
     <form method="post" enctype="multipart/form-data">
+      
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
        
         <div class="mb-3">
-            <label asp-for="Name" class="form-label"></label>
+            <label asp-for="Name" class="form-label">Service Name</label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
-      
+       
         <div class="mb-3">
-            <label asp-for="Description" class="form-label"></label>
+            <label asp-for="Description" class="form-label">Description</label>
             <textarea asp-for="Description" class="form-control" rows="4"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
@@ -40,8 +42,8 @@
 
        
         <div class="mb-3">
-            <label class="form-label">Upload Image</label>
-            <input name="imageFile" type="file" class="form-control" />
+            <label asp-for="ImageData" class="form-label">Upload Image</label>
+            <input type="file" name="imageFile" class="form-control" />
         </div>
 
        
@@ -51,3 +53,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

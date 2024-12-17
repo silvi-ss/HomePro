@@ -1,17 +1,16 @@
 using HomePro.Data;
 using HomePro.Data.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HomePro.Data.Repository.Interfaces;
 
 using HomePro.Web.Infrastructure.Extensions;
 using HomePro.Services.Data.Interfaces;
 using HomePro.Data.Repository;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using HomePro.Web.EmailServices;
+using HomePro.Data.Seeding;
+//using HomePro.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +56,8 @@ builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -67,6 +68,15 @@ else
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var serviceProvider = scope.ServiceProvider;
+
+    string jsonPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot/data/services.json");
+
+    await DbSeeder.SeedServicesAsync(serviceProvider, jsonPath);
 }
 
 app.UseHttpsRedirection();
