@@ -1,50 +1,36 @@
 ﻿using HomePro.Data.Models;
+using HomePro.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using HomePro.Common;
-
-
-namespace HomePro.Data.Configuration
+namespace HomePro.Data.Configurations
 {
     public class ServiceCatalogConfiguration : IEntityTypeConfiguration<ServiceCatalog>
     {
         public void Configure(EntityTypeBuilder<ServiceCatalog> builder)
         {
-            builder.HasKey(s => s.Id);
+            builder.HasKey(sc => sc.Id);
 
-            builder
-                .Property(s => s.Name)
-                .HasMaxLength(EntityValidationConstants.ServiceCatalog.NameMaxLength)
-                .IsRequired()
-                .HasComment("Name of the service");
+            builder.Property(sc => sc.Name)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.ServiceCatalog.NameMaxLength);
 
-            builder
-                .Property(s => s.Description)
-                .HasMaxLength(EntityValidationConstants.ServiceCatalog.DescriptionMaxLength)
-                .IsRequired()
-                .HasComment("Detailed description of the service");
+            builder.Property(sc => sc.Description)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.ServiceCatalog.DescriptionMaxLength);
 
-            builder
-               .Property(s => s.Image)
-               .HasMaxLength(EntityValidationConstants.ServiceCatalog.ImageMaxLength)
-               .HasDefaultValue(EntityValidationConstants.ServiceCatalog.DefaultImageName)
-               .IsRequired(false)
-               .HasComment("Service image file name");
+            builder.Property(sc => sc.Image)
+                   .HasMaxLength(EntityValidationConstants.ServiceCatalog.ImageMaxLength);
 
-            builder
-                .Property(s => s.Type)
-                .IsRequired()
-                .HasComment("Type of service");
+            builder.HasMany(sc => sc.ServiceRequests)
+                   .WithOne(sr => sr.ServiceCatalog)
+                   .HasForeignKey(sr => sr.ServiceCatalogId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
-            builder
-                .Property(s => s.IsDeleted)
-                .IsRequired()
-                .HasDefaultValue(false)
-                .HasComment("Soft delete flag");
-
-            builder
-                .HasIndex(s => s.IsDeleted);
+            builder.HasMany(sc => sc.UserFavorites)
+                   .WithOne(uf => uf.Service)
+                   .HasForeignKey(uf => uf.ServiceCatalogId)
+                   .OnDelete(DeleteBehavior.ClientNoAction);
         }
     }
 }

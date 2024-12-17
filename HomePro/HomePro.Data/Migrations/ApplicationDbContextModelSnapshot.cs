@@ -29,48 +29,35 @@ namespace HomePro.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BuildingNumber")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasComment("Building number (if applicable)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(170)
-                        .HasColumnType("nvarchar(170)")
-                        .HasComment("City of the address");
+                        .HasColumnType("nvarchar(170)");
 
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
-                        .HasComment("Country of the address");
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("District")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("District or region of the address");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Entry")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasComment("Entry number (if applicable)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Floor")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasComment("Floor number (if applicable)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Soft delete flag");
+                        .HasColumnType("bit");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasComment("Postal code of the address");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<Guid>("PropertyId")
                         .HasColumnType("uniqueidentifier");
@@ -78,14 +65,12 @@ namespace HomePro.Data.Migrations
                     b.Property<string>("StreetName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("Street name of the address (if applicable)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("StreetNumber")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("Street number of the address");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -119,10 +104,7 @@ namespace HomePro.Data.Migrations
                         .HasComment("First name of the user");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Soft delete flag");
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -165,8 +147,6 @@ namespace HomePro.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsDeleted");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -185,46 +165,41 @@ namespace HomePro.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasComment("The ID of the user who will receive the notification");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date and time when the notification was created");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Indicates whether the notification is deleted");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsRead")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Indicates whether the notification is read");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasComment("Message content of the notification");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date and time when the notification was last modified");
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ServiceRequestId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)")
-                        .HasComment("Title of the notification");
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasComment("Type of the notification");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ServiceRequestId");
 
                     b.ToTable("Notifications");
                 });
@@ -238,65 +213,41 @@ namespace HomePro.Data.Migrations
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ClientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 16, 16, 41, 8, 20, DateTimeKind.Utc).AddTicks(9514))
-                        .HasComment("Date and time of property creation");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasComment("Additional description for the property");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("Display name of the property");
-
-                    b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
-                        .HasDefaultValue("default.jpg")
-                        .HasComment("Property image file name");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Soft delete flag");
+                        .HasColumnType("bit");
 
                     b.Property<int>("Rooms")
-                        .HasColumnType("int")
-                        .HasComment("Number of rooms in the property");
+                        .HasColumnType("int");
 
                     b.Property<double>("SquareMeters")
                         .HasPrecision(18, 2)
-                        .HasColumnType("float(18)")
-                        .HasComment("Property area in square meters");
+                        .HasColumnType("float(18)");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasComment("Type of property (Apartment, House, etc.)");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId")
                         .IsUnique();
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Properties");
                 });
@@ -310,35 +261,21 @@ namespace HomePro.Data.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasComment("Detailed description of the service");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
-                        .HasDefaultValue("default.jpg")
-                        .HasComment("Service image file name");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Soft delete flag");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("Name of the service");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasComment("Type of service");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.ToTable("ServiceCatalogs");
                 });
@@ -349,39 +286,25 @@ namespace HomePro.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ClientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date and time when the service request was created");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasComment("Additional description for the service request");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<decimal>("FinalPrice")
                         .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Final price of the service request");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Frequency")
-                        .HasColumnType("int")
-                        .HasComment("Frequency of the service request");
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsCompleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Indicates if the service request is completed");
-
-                    b.Property<DateTime>("PreferredDate")
-                        .HasColumnType("datetime2")
-                        .HasComment("Preferred date for the service");
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("PropertyId")
                         .HasColumnType("uniqueidentifier");
@@ -390,12 +313,12 @@ namespace HomePro.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
-                        .HasColumnType("int")
-                        .HasComment("Current status of the service request");
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ClientId");
 
@@ -403,10 +326,7 @@ namespace HomePro.Data.Migrations
 
                     b.HasIndex("ServiceCatalogId");
 
-                    b.ToTable("ServiceRequests", t =>
-                        {
-                            t.HasCheckConstraint("CK_ServiceRequest_FinalPrice", "FinalPrice >= 0.0 AND FinalPrice <= 10000.0");
-                        });
+                    b.ToTable("ServiceRequests");
                 });
 
             modelBuilder.Entity("HomePro.Data.Models.ServiceReview", b =>
@@ -421,22 +341,16 @@ namespace HomePro.Data.Migrations
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasComment("Review comment");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date and time of review creation");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Soft delete flag");
+                        .HasColumnType("bit");
 
                     b.Property<int>("Rating")
-                        .HasColumnType("int")
-                        .HasComment("Rating from 1 to 5");
+                        .HasColumnType("int");
 
                     b.Property<Guid>("ServiceRequestId")
                         .HasColumnType("uniqueidentifier");
@@ -444,8 +358,6 @@ namespace HomePro.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ServiceRequestId");
 
@@ -460,19 +372,7 @@ namespace HomePro.Data.Migrations
                     b.Property<Guid>("ServiceCatalogId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddedOn")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date when service was added to favorites");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasComment("Soft delete flag");
-
                     b.HasKey("UserId", "ServiceCatalogId");
-
-                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ServiceCatalogId");
 
@@ -610,6 +510,24 @@ namespace HomePro.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HomePro.Data.Models.Notification", b =>
+                {
+                    b.HasOne("HomePro.Data.Models.ApplicationUser", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HomePro.Data.Models.ServiceRequest", "ServiceRequest")
+                        .WithMany()
+                        .HasForeignKey("ServiceRequestId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Client");
+
+                    b.Navigation("ServiceRequest");
+                });
+
             modelBuilder.Entity("HomePro.Data.Models.Property", b =>
                 {
                     b.HasOne("HomePro.Data.Models.Address", "Address")
@@ -618,12 +536,8 @@ namespace HomePro.Data.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("HomePro.Data.Models.ApplicationUser", null)
-                        .WithMany("Properties")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("HomePro.Data.Models.ApplicationUser", "Client")
-                        .WithMany()
+                        .WithMany("Properties")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -635,12 +549,8 @@ namespace HomePro.Data.Migrations
 
             modelBuilder.Entity("HomePro.Data.Models.ServiceRequest", b =>
                 {
-                    b.HasOne("HomePro.Data.Models.ApplicationUser", null)
-                        .WithMany("ServiceRequests")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("HomePro.Data.Models.ApplicationUser", "Client")
-                        .WithMany()
+                        .WithMany("ServiceRequests")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();

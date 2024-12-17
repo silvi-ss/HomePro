@@ -1,51 +1,32 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomePro.Data.Models;
+using HomePro.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using HomePro.Data.Models;
-using HomePro.Common;
-
-public class ServiceReviewConfiguration : IEntityTypeConfiguration<ServiceReview>
+namespace HomePro.Data.Configurations
 {
-    public void Configure(EntityTypeBuilder<ServiceReview> builder)
+    public class ServiceReviewConfiguration : IEntityTypeConfiguration<ServiceReview>
     {
-        builder.HasKey(r => r.Id);
+        public void Configure(EntityTypeBuilder<ServiceReview> builder)
+        {
+            builder.HasKey(sr => sr.Id);
 
-        builder
-            .Property(r => r.Comment)
-            .HasMaxLength(EntityValidationConstants.ServiceReview.CommentMaxLength)
-            .IsRequired()
-            .HasComment("Review comment");
+            builder.Property(sr => sr.Comment)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.ServiceReview.CommentMaxLength);
 
-        builder
-            .Property(r => r.Rating)
-            .IsRequired()
-            .HasComment("Rating from 1 to 5");
+            builder.Property(sr => sr.Rating)
+                   .IsRequired();
 
-        builder
-            .Property(r => r.CreatedOn)
-            .IsRequired()
-            .HasComment("Date and time of review creation");
+            builder.HasOne(sr => sr.Client)
+                   .WithMany(u => u.Reviews)
+                   .HasForeignKey(sr => sr.ClientId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
-        builder
-            .Property(r => r.IsDeleted)
-            .IsRequired()
-            .HasDefaultValue(false)
-            .HasComment("Soft delete flag");
-
-       
-        builder
-            .HasOne(r => r.ServiceRequest)
-            .WithMany(s => s.Reviews)
-            .HasForeignKey(r => r.ServiceRequestId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        builder
-            .HasOne(r => r.Client)
-            .WithMany()
-            .HasForeignKey(r => r.ClientId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        builder
-            .HasIndex(r => r.IsDeleted);
+            builder.HasOne(sr => sr.ServiceRequest)
+                   .WithMany(srq => srq.Reviews)
+                   .HasForeignKey(sr => sr.ServiceRequestId)
+                   .OnDelete(DeleteBehavior.NoAction);
+        }
     }
 }

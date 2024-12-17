@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePro.Web.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePro.Web.ViewModels", "HomePro.Web.ViewModels\HomePro.Web.ViewModels.csproj", "{58AF952A-D92F-4CF9-9A60-6245F4DA63B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F3BDDE81-0876-4314-8E7C-4C0A66799A89}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Services", "_Services", "{F3BDDE81-0876-4314-8E7C-4C0A66799A89}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePro.Services.Data", "HomePro.Services.Data\HomePro.Services.Data.csproj", "{ACB1B32D-0529-4E74-AD0D-1D73A4A43C25}"
 EndProject

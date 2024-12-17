@@ -1,90 +1,37 @@
-﻿namespace HomePro.Data.Configuration
+﻿using HomePro.Data.Models;
+using HomePro.Common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace HomePro.Data.Configurations
 {
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-    using HomePro.Data.Models;
-    using HomePro.Common;
-
-
     public class PropertyConfiguration : IEntityTypeConfiguration<Property>
     {
         public void Configure(EntityTypeBuilder<Property> builder)
         {
             builder.HasKey(p => p.Id);
 
-            builder
-                .Property(p => p.DisplayName)
-                .HasMaxLength(EntityValidationConstants.Property.DisplayNameMaxLength)
-                .IsRequired()
-                .HasComment("Display name of the property");
+            builder.Property(p => p.DisplayName)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.Property.DisplayNameMaxLength);
 
-            builder
-                .Property(p => p.SquareMeters)
-                .IsRequired()
-                .HasPrecision(18, 2)
-                .HasComment("Property area in square meters");
+            builder.Property(p => p.Description)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.Property.DescriptionMaxLength);
 
-            builder
-                .Property(p => p.Rooms)
-                .IsRequired()
-                .HasComment("Number of rooms in the property");
+            builder.Property(p => p.SquareMeters)
+                   .IsRequired()
+                   .HasPrecision(18, 2);
 
-            builder
-                .Property(p => p.Description)
-                .HasMaxLength(EntityValidationConstants.Property.DescriptionMaxLength)
-                .IsRequired(false)
-                .HasComment("Additional description for the property");
+            builder.HasOne(p => p.Client)
+                   .WithMany(u => u.Properties)
+                   .HasForeignKey(p => p.ClientId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
-            builder
-                .Property(p => p.Image)
-                .HasMaxLength(EntityValidationConstants.Property.ImageMaxLength)
-                .HasDefaultValue(EntityValidationConstants.Property.DefaultImageName)
-                .IsRequired(false)
-                .HasComment("Property image file name");
-
-            builder
-                .Property(p => p.CreatedOn)
-                .IsRequired()
-                .HasColumnType("datetime2")
-                .HasDefaultValue(DateTime.UtcNow)
-                .HasComment("Date and time of property creation");
-
-            builder
-                .Property(p => p.Type)
-                .IsRequired()
-                .HasComment("Type of property (Apartment, House, etc.)");
-
-            builder
-                .Property(p => p.IsDeleted)
-                .IsRequired()
-                .HasDefaultValue(false)
-                .HasComment("Soft delete flag");
-            
-            builder
-                .HasOne(p => p.Client)
-                .WithMany()
-                .HasForeignKey(p => p.ClientId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder
-                .HasOne(p => p.Address)
-                .WithOne(a => a.Property)
-                .HasForeignKey<Property>(p => p.AddressId)
-                .OnDelete(DeleteBehavior.NoAction);
-                        
-            builder
-                .HasMany(p => p.ServiceRequests)
-                .WithOne(sr => sr.Property)
-                .HasForeignKey(sr => sr.PropertyId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder
-                .HasIndex(p => p.IsDeleted);
-
-            builder
-                .HasIndex(p => p.ClientId);
-
+            builder.HasOne(p => p.Address)
+                   .WithOne(a => a.Property)
+                   .HasForeignKey<Property>(p => p.AddressId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

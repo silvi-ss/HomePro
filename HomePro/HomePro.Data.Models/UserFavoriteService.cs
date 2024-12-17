@@ -9,12 +9,9 @@ namespace HomePro.Data.Models
     public class UserFavoriteService
     {
         public Guid UserId { get; set; }
-        public ApplicationUser User { get; set; } = null!;
-
+        public virtual ApplicationUser User { get; set; } = null!;
         public Guid ServiceCatalogId { get; set; }
-        public ServiceCatalog Service { get; set; } = null!;
+        public virtual ServiceCatalog Service { get; set; } = null!;
 
-        public DateTime AddedOn { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

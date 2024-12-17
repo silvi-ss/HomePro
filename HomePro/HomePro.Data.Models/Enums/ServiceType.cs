@@ -4,14 +4,16 @@ namespace HomePro.Data.Models.Enums
 {
     public enum ServiceType
     {
-        Plumbing = 10,
-        Electrical = 20,
-        Appliances = 30,
-        Handyman = 40,
-        Locks = 50,
-        Alarm = 60,
-        AirConditioningAndVentilation = 70,
-        Cleaning = 80,
-        Other = 90
+               MajorRepair = 10,        
+        PartialRepair = 20,                 
+        Replacement = 30,    
+        InitialInspection = 40,  
+        AnnualInspection = 50, 
+        Cleaning = 60,           
+        Maintenance = 70,        
+        Installation = 80,     
+        Configuration = 90,     
+        Diagnostics = 100,       
+        GeneralConsultation = 110 
     }
 }

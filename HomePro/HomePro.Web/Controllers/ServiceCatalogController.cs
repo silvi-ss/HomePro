@@ -19,6 +19,17 @@ namespace HomePro.Web.Controllers
             this.serviceCatalogService = serviceCatalogService;
         }
 
+        //
+        //private readonly IServiceCatalogService serviceCatalogService;
+        //private readonly IEnumerable<ServiceTypeViewModel> serviceTypes;
+
+        //public ServiceCatalogController(IServiceCatalogService serviceCatalogService)
+        //    : base()
+        //{
+        //    this.serviceCatalogService = serviceCatalogService;
+        //    this.serviceTypes = this.serviceCatalogService.GetServiceTypes().ToList();
+        //}
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult ServiceTypes()
@@ -86,5 +97,67 @@ namespace HomePro.Web.Controllers
                 return View(model);
             }
         }
-	}
+
+        [Authorize(Roles = "Manager")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var service = await serviceCatalogService.GetServiceByIdAsync(id);
+
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ServiceCatalogFormModel
+            {
+                //Name = service.Name,
+                //Description = service.Description,
+                //ServiceTypeId = (int)service.Type,
+                //ImageName = !string.IsNullOrEmpty(service.Image)
+                //? Path.GetFileName(service.Image)
+                //: null, // Предпазване от null
+                //ServiceTypes = serviceCatalogService.GetServiceTypes() // Зареждане на типовете услуги
+            };
+
+            return View(model);
+        }
+
+
+
+
+        [HttpPost]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> Edit(Guid id, ServiceCatalogFormModel model, IFormFile? imageFile)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.ServiceTypes = serviceCatalogService.GetServiceTypes();
+                return View(model);
+            }
+
+            try
+            {
+                var success = await serviceCatalogService.UpdateServiceAsync(id, model);
+
+                if (!success)
+                {
+                    return NotFound();
+                }
+
+                TempData["SuccessMessage"] = "Service updated successfully!";
+                return RedirectToAction("Details", "ServiceCatalog", new { id });
+            }
+            catch
+            {
+                ModelState.AddModelError("", "An error occurred while updating the service.");
+                model.ServiceTypes = serviceCatalogService.GetServiceTypes();
+                return View(model);
+            }
+        }
+
+
+
+
+    }
 }

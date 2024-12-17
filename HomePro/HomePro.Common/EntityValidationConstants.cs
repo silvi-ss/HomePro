@@ -1,7 +1,10 @@
 ﻿namespace HomePro.Common
 {
     public static class EntityValidationConstants
-    {
+    { 
+        public const string DefaultImageName = "default.jpg";
+        public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
+
         public static class Property
         {
             public const int DisplayNameMinLength = 5;
@@ -16,12 +19,8 @@
             public const int RoomsMinCount = 1;
             public const int RoomsMaxCount = 100;
 
-            public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
-
             public const int ImageMinLength = 3;
             public const int ImageMaxLength = 256;
-            public const string DefaultImageName = "default.jpg";
-
         }
 
         public static class Address 
@@ -74,14 +73,8 @@
 
             public const int ImageMinLength = 3;
             public const int ImageMaxLength = 256;
-            public const string DefaultImageName = "default.jpg";
         }
-
-        public static class PropertyContract
-        {
-            public const int ContractNumberMaxLength = 50;
-            public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
-        }
+                
 
         public static class ServiceRequest
         {

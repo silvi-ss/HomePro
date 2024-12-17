@@ -1,63 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomePro.Common;
+using HomePro.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using HomePro.Data.Models;
-using HomePro.Common;
-
-namespace HomePro.Data.Configuration
+namespace HomePro.Data.Configurations
 {
     public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
     {
         public void Configure(EntityTypeBuilder<Notification> builder)
         {
-           
             builder.HasKey(n => n.Id);
 
-           
-            builder
-                .Property(n => n.CreatedOn)
-                .IsRequired()
-                .HasColumnType("datetime2")
-                .HasComment("Date and time when the notification was created");
+            builder.Property(n => n.Title)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.Notification.TitleMaxLength);
 
-            builder
-                .Property(n => n.ModifiedOn)
-                .HasColumnType("datetime2")
-                .HasComment("Date and time when the notification was last modified");
+            builder.Property(n => n.Message)
+                   .IsRequired()
+                   .HasMaxLength(EntityValidationConstants.Notification.MessageMaxLength);
 
-            builder
-                .Property(n => n.IsDeleted)
-                .IsRequired()
-                .HasDefaultValue(false)
-                .HasComment("Indicates whether the notification is deleted");
+            builder.HasOne(n => n.Client)
+                   .WithMany()
+                   .HasForeignKey(n => n.ClientId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
-            builder
-                .Property(n => n.Title)
-                .HasMaxLength(EntityValidationConstants.Notification.TitleMaxLength)
-                .IsRequired()
-                .HasComment("Title of the notification");
-
-            builder
-                .Property(n => n.Message)
-                .HasMaxLength(EntityValidationConstants.Notification.MessageMaxLength)
-                .IsRequired()
-                .HasComment("Message content of the notification");
-
-            builder
-                .Property(n => n.ClientId)
-                .IsRequired()
-                .HasComment("The ID of the user who will receive the notification");
-
-            builder
-                .Property(n => n.IsRead)
-                .IsRequired()
-                .HasDefaultValue(false)
-                .HasComment("Indicates whether the notification is read");
-
-            builder
-                .Property(n => n.Type)
-                .IsRequired()
-                .HasComment("Type of the notification");
+            builder.HasOne(n => n.ServiceRequest)
+                   .WithMany()
+                   .HasForeignKey(n => n.ServiceRequestId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

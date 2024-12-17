@@ -27,14 +27,6 @@ namespace HomePro.Data.Configuration
                 .HasForeignKey(r => r.ClientId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder
-                .Property(u => u.IsDeleted)
-                .IsRequired()
-                .HasDefaultValue(false)
-                .HasComment("Soft delete flag");
-            
-            builder
-                .HasIndex(u => u.IsDeleted);
         }
     }
 }

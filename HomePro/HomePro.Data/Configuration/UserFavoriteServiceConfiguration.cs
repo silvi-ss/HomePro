@@ -1,42 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomePro.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using HomePro.Data.Models;
-using HomePro.Common;
-
-namespace HomePro.Data.Configuration
+namespace HomePro.Data.Configurations
 {
     public class UserFavoriteServiceConfiguration : IEntityTypeConfiguration<UserFavoriteService>
     {
         public void Configure(EntityTypeBuilder<UserFavoriteService> builder)
         {
-            builder.HasKey(fs => new { fs.UserId, fs.ServiceCatalogId });
+            builder.HasKey(ufs => new { ufs.UserId, ufs.ServiceCatalogId }); 
 
-            builder
-                .Property(fs => fs.AddedOn)
-                .IsRequired()
-                .HasComment("Date when service was added to favorites");
+            builder.HasOne(ufs => ufs.User)
+                   .WithMany(u => u.FavoriteServices)
+                   .HasForeignKey(ufs => ufs.UserId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
-            builder
-                .Property(fs => fs.IsDeleted)
-                .IsRequired()
-                .HasDefaultValue(false)
-                .HasComment("Soft delete flag");
-
-            builder
-                .HasOne(fs => fs.User)
-                .WithMany(u => u.FavoriteServices)
-                .HasForeignKey(fs => fs.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder
-                .HasOne(fs => fs.Service)
-                .WithMany(s => s.UserFavorites)
-                .HasForeignKey(fs => fs.ServiceCatalogId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder
-                .HasIndex(fs => fs.IsDeleted);
+            builder.HasOne(ufs => ufs.Service)
+                   .WithMany(sc => sc.UserFavorites)
+                   .HasForeignKey(ufs => ufs.ServiceCatalogId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

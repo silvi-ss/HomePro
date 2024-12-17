@@ -74,7 +74,12 @@ if (app.Environment.IsDevelopment())
     using var scope = app.Services.CreateScope();
     var serviceProvider = scope.ServiceProvider;
 
-    string jsonPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot/data/services.json");
+    string jsonPath = Path.Combine(Directory.GetCurrentDirectory(),
+            "HomePro.Data",
+            "Seeding",
+            "Data",
+            "services.json");
+
 
     await DbSeeder.SeedServicesAsync(serviceProvider, jsonPath);
 }

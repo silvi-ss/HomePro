@@ -11,5 +11,15 @@
 
 		Task<bool> AddServiceAsync(ServiceCatalogFormModel model);
 
-	}
+        Task<bool> UpdateServiceAsync(Guid id, ServiceCatalogFormModel model);
+
+        Task<ServiceCatalogFormModel> GetServiceByIdAsync(Guid id);
+
+        
+
+
+
+
+
+    }
 }

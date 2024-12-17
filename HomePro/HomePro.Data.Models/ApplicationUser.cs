@@ -7,13 +7,13 @@ namespace HomePro.Data.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
-        public ICollection<Property> Properties { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
             = new HashSet<Property>();
-        public ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
             = new HashSet<ServiceRequest>();
-        public ICollection<ServiceReview> Reviews { get; set; }
+        public virtual ICollection<ServiceReview> Reviews { get; set; }
             = new HashSet<ServiceReview>();
-        public ICollection<UserFavoriteService> FavoriteServices { get; set; }
+        public virtual ICollection<UserFavoriteService> FavoriteServices { get; set; }
              = new HashSet<UserFavoriteService>();
 
     }
